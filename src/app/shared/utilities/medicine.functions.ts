@@ -1,7 +1,7 @@
 import { MedicineFactory } from '../models/classes/factory/medicine.factory';
 import { Medicine } from '../models/interfaces/medicine.interface';
 
-export function createMedicine(data: Medicine, factory: MedicineFactory) {
+export function createMedicine(data: Medicine, factory: MedicineFactory): void {
   const createMedicine = factory.addMedicine(data);
   createMedicine.Medicine();
 }
@@ -9,4 +9,8 @@ export function createMedicine(data: Medicine, factory: MedicineFactory) {
 export function generateRandomID(prefix: string = 'ID'): string {
   const randomPart = Math.random().toString(36).substr(2, 8); // Parte aleatoria
   return `${prefix}_${randomPart}`;
+}
+
+export function getData(): Medicine[] {
+  return JSON.parse(localStorage.getItem('medicina') || '[]');
 }

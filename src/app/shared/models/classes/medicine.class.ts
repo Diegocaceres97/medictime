@@ -13,7 +13,6 @@ export class AddMedicine extends MedicineAbstract {
    Medicine(): void {
       this.medicines.push(this.data);
       localStorage.setItem('medicina',JSON.stringify(this.medicines));
-      console.log(this.medicines)
     }
 }
 export class EditMedicine extends MedicineAbstract {

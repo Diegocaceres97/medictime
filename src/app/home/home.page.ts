@@ -18,6 +18,8 @@ import { Medicine } from '../shared/models/interfaces/medicine.interface';
 import { UserMedicine } from '../shared/models/classes/factory/userMedicine.factory';
 import { createMedicine, generateRandomID } from '../shared/utilities/medicine.functions';
 import { AlertController } from '@ionic/angular';
+import { CommonModule } from '@angular/common';
+import { ShowMedicineComponent } from '../shared/components/medicine/show-medicine/show-medicine.component';
 
 @Component({
   selector: 'app-home',
@@ -37,6 +39,8 @@ import { AlertController } from '@ionic/angular';
     IonInput,
     IonDatetime,
     AddComponent,
+    CommonModule,
+    ShowMedicineComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
@@ -54,8 +58,11 @@ export class HomePage {
     perDay: 1,
     date: undefined,
   };
+  hasMedicine: boolean = false;
 
-  constructor(private alertController: AlertController) {}
+  constructor(private alertController: AlertController) {
+    this.hasMedicine = localStorage.getItem('medicina') ? true : false;
+  }
 
   @ViewChild(IonModal) modal!: IonModal;
 
@@ -89,6 +96,7 @@ export class HomePage {
     createMedicine(this.data,practiceFac);
 
     this.cleanAllData();
+    this.hasMedicine = true;
   }
 
   cleanAllData() {
@@ -106,4 +114,8 @@ export class HomePage {
   }
 
   openModal() {}
+
+  deleteAll() {
+    this.hasMedicine = false;
+  }
 }
