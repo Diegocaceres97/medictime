@@ -1,21 +1,25 @@
+import { MedicineService } from './../../../services/medicine.service';
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { IonButton, IonIcon } from '@ionic/angular/standalone';
 import { Medicine } from 'src/app/shared/models/interfaces/medicine.interface';
-import { getData } from 'src/app/shared/utilities/medicine.functions';
 
 @Component({
   selector: 'app-show-medicine',
   templateUrl: './show-medicine.component.html',
   styleUrls: ['./show-medicine.component.scss'],
   standalone: true,
-  imports: [IonButton, CommonModule]
+  imports: [IonButton, IonIcon,CommonModule],
 })
-export class ShowMedicineComponent {
-  data: Medicine[] = [];
+export class ShowMedicineComponent implements OnInit {
+  @Input() data!: Medicine[];
 
-  constructor() {
-    this.data = getData();
-   }
-
+  medicines: Medicine[] = [];
+  constructor(private medicineService: MedicineService) {
+  }
+  ngOnInit(): void {
+    if (!this.data) {
+      this.data = this.medicineService.getData();
+    }
+  }
 }

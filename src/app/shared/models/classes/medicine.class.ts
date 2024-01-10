@@ -1,9 +1,12 @@
+import { Inject } from "@angular/core";
+import { MedicineService } from "../../services/medicine.service";
 import { Medicine } from "../interfaces/medicine.interface";
 import { MedicineAbstract } from "./medicine.abstract";
 
 export class AddMedicine extends MedicineAbstract {
 
   medicines: Medicine[] = [];
+  proof = new MedicineService;
 
   constructor(public data: Medicine){
     super();
@@ -12,6 +15,7 @@ export class AddMedicine extends MedicineAbstract {
 
    Medicine(): void {
       this.medicines.push(this.data);
+      //console.log(this.proof.medicineSubject.value)
       localStorage.setItem('medicina',JSON.stringify(this.medicines));
     }
 }

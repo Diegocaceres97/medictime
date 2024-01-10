@@ -20,6 +20,7 @@ import { createMedicine, generateRandomID } from '../shared/utilities/medicine.f
 import { AlertController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { ShowMedicineComponent } from '../shared/components/medicine/show-medicine/show-medicine.component';
+import { MedicineService } from '../shared/services/medicine.service';
 
 @Component({
   selector: 'app-home',
@@ -51,6 +52,7 @@ export class HomePage {
   medicineHour?: string;
   medicineDay?: string;
   date!: Date;
+  allData: Medicine[] = this.medicalService.getData();
   data: Medicine = {
     id: '1',
     name: '',
@@ -60,7 +62,8 @@ export class HomePage {
   };
   hasMedicine: boolean = false;
 
-  constructor(private alertController: AlertController) {
+  constructor(private alertController: AlertController,
+    private medicalService: MedicineService) {
     this.hasMedicine = localStorage.getItem('medicina') ? true : false;
   }
 
@@ -97,6 +100,7 @@ export class HomePage {
 
     this.cleanAllData();
     this.hasMedicine = true;
+    this.allData = this.medicalService.getData();
   }
 
   cleanAllData() {
