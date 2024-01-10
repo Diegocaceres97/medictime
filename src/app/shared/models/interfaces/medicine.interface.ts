@@ -1,7 +1,7 @@
 import { MedicineAbstract } from '../classes/medicine.abstract';
 
 export interface Medicine {
-  id?: number;
+  id?: string;
   name?: string;
   perHour?: number;
   perDay?: number;

@@ -7,11 +7,12 @@ export class AddMedicine extends MedicineAbstract {
 
   constructor(public data: Medicine){
     super();
+    this.medicines = JSON.parse(localStorage.getItem('medicina') || '[]');
   }
 
    Medicine(): void {
       this.medicines.push(this.data);
-      localStorage.setItem('medicina',String(this.medicines));
+      localStorage.setItem('medicina',JSON.stringify(this.medicines));
       console.log(this.medicines)
     }
 }

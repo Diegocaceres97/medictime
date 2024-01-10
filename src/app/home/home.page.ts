@@ -16,7 +16,7 @@ import { FormsModule } from '@angular/forms';
 import { OverlayEventDetail } from '@ionic/core';
 import { Medicine } from '../shared/models/interfaces/medicine.interface';
 import { UserMedicine } from '../shared/models/classes/factory/userMedicine.factory';
-import { createMedicine } from '../shared/utilities/medicine.functions';
+import { createMedicine, generateRandomID } from '../shared/utilities/medicine.functions';
 import { AlertController } from '@ionic/angular';
 
 @Component({
@@ -48,7 +48,7 @@ export class HomePage {
   medicineDay?: string;
   date!: Date;
   data: Medicine = {
-    id: 1,
+    id: '1',
     name: '',
     perHour: 1,
     perDay: 1,
@@ -69,7 +69,7 @@ export class HomePage {
     if(!this.name || parseInt(this.medicineDay as string) <= 0 || parseInt(this.medicineHour as string) <= 0 ) {
       console.error('por favor corrige los datos');
       const alert = await this.alertController.create({
-        header: 'Campo faltante',
+        header: 'Campo faltante o erróneo',
         message: 'Por favor revisa que campo hace falta llenar o corregir',
         buttons: ['Okay'],
       });
@@ -79,7 +79,7 @@ export class HomePage {
     }
 
     this.data = {
-      id: 2,
+      id: generateRandomID('USR'),
       name: this.name!,
       perHour: parseInt(this.medicineHour!),
       perDay: parseInt(this.medicineDay!),
