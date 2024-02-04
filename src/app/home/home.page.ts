@@ -76,7 +76,7 @@ export class HomePage {
   async confirm() {
     this.modal.dismiss(this.name, 'confirm');
 
-    if(!this.name || parseInt(this.medicineDay as string) <= 0 || parseInt(this.medicineHour as string) <= 0 ) {
+    if(!this.name ||( parseInt(this.medicineDay as string) <= 0 && parseInt(this.medicineHour as string) <= 0) || (!this.medicineHour && !this.medicineDay)) {
       console.error('por favor corrige los datos');
       const alert = await this.alertController.create({
         header: 'Campo faltante o erróneo',
