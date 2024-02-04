@@ -1,7 +1,8 @@
 import { MedicineService } from './../../../services/medicine.service';
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { IonButton, IonIcon } from '@ionic/angular/standalone';
+import { Device } from '@capacitor/device';
+import { IonButton, IonIcon, IonActionSheet } from '@ionic/angular/standalone';
 import { Medicine } from 'src/app/shared/models/interfaces/medicine.interface';
 
 @Component({
@@ -9,17 +10,46 @@ import { Medicine } from 'src/app/shared/models/interfaces/medicine.interface';
   templateUrl: './show-medicine.component.html',
   styleUrls: ['./show-medicine.component.scss'],
   standalone: true,
-  imports: [IonButton, IonIcon,CommonModule],
+  imports: [IonButton, IonIcon, IonActionSheet, CommonModule],
 })
 export class ShowMedicineComponent implements OnInit {
   @Input() data!: Medicine[];
 
   medicines: Medicine[] = [];
-  constructor(private medicineService: MedicineService) {
-  }
-  ngOnInit(): void {
+  public actionSheetButtons = [
+    {
+      text: 'Eliminar',
+      role: 'destructive',
+      data: {
+        action: 'delete',
+      },
+    },
+    {
+      text: 'Editar',
+      data: {
+        action: 'share',
+      },
+    },
+    {
+      text: 'Cancel',
+      role: 'cancel',
+      data: {
+        action: 'cancel',
+      },
+    },
+  ];
+
+  constructor(private medicineService: MedicineService) {}
+  async ngOnInit(): Promise<void> {
     if (!this.data) {
       this.data = this.medicineService.getData();
     }
+
+    await this.deviceInformation();
+  }
+
+  async deviceInformation() {
+    const info = await Device.getInfo();
+    console.log(info.platform === 'ios');
   }
 }

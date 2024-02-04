@@ -1,7 +1,9 @@
 <div class="container" *ngFor="let item of data">
-  <div class="container__text">
+  <div class="container__text" id="open-action-sheet">
     <h6><ion-icon name="bandage-outline"></ion-icon> {{item.name | titlecase}}</h6>
     <p>cada: <b>{{item.perHour}}</b> horas</p>
     <p>por: <b>{{item.perDay}}</b> días</p>
   </div>
 </div>
+
+<ion-action-sheet trigger="open-action-sheet" header="Actions" [buttons]="actionSheetButtons"></ion-action-sheet>
