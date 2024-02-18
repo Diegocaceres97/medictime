@@ -16,7 +16,10 @@ import { FormsModule } from '@angular/forms';
 import { OverlayEventDetail } from '@ionic/core';
 import { Medicine } from '../shared/models/interfaces/medicine.interface';
 import { UserMedicine } from '../shared/models/classes/factory/userMedicine.factory';
-import { createMedicine, generateRandomID } from '../shared/utilities/medicine.functions';
+import {
+  createMedicine,
+  generateRandomID,
+} from '../shared/utilities/medicine.functions';
 import { AlertController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { ShowMedicineComponent } from '../shared/components/medicine/show-medicine/show-medicine.component';
@@ -41,7 +44,7 @@ import { MedicineService } from '../shared/services/medicine.service';
     IonDatetime,
     AddComponent,
     CommonModule,
-    ShowMedicineComponent
+    ShowMedicineComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
@@ -62,8 +65,10 @@ export class HomePage {
   };
   hasMedicine: boolean = false;
 
-  constructor(private alertController: AlertController,
-    private medicalService: MedicineService) {
+  constructor(
+    private alertController: AlertController,
+    private medicalService: MedicineService
+  ) {
     this.hasMedicine = localStorage.getItem('medicina') ? true : false;
   }
 
@@ -76,7 +81,12 @@ export class HomePage {
   async confirm() {
     this.modal.dismiss(this.name, 'confirm');
 
-    if(!this.name ||( parseInt(this.medicineDay as string) <= 0 && parseInt(this.medicineHour as string) <= 0) || (!this.medicineHour && !this.medicineDay)) {
+    if (
+      !this.name ||
+      (parseInt(this.medicineDay as string) <= 0 &&
+        parseInt(this.medicineHour as string) <= 0) ||
+      (!this.medicineHour && !this.medicineDay)
+    ) {
       console.error('por favor corrige los datos');
       const alert = await this.alertController.create({
         header: 'Campo faltante o erróneo',
@@ -84,8 +94,8 @@ export class HomePage {
         buttons: ['Okay'],
       });
 
-      await alert.present();
-    return;
+      alert.present();
+      return;
     }
 
     this.data = {
@@ -93,10 +103,10 @@ export class HomePage {
       name: this.name!,
       perHour: parseInt(this.medicineHour!),
       perDay: parseInt(this.medicineDay!),
-      date: this.date ?? new Date
-    }
+      date: this.date ?? new Date(),
+    };
     const practiceFac = new UserMedicine();
-    createMedicine(this.data,practiceFac);
+    createMedicine(this.data, practiceFac);
 
     this.cleanAllData();
     this.hasMedicine = true;
@@ -104,10 +114,10 @@ export class HomePage {
   }
 
   cleanAllData() {
-    this.name='';
+    this.name = '';
     this.medicineDay = '';
     this.medicineHour = '';
-    this.date = new Date;
+    this.date = new Date();
   }
 
   onWillDismiss(event: Event) {

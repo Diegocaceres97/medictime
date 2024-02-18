@@ -14,6 +14,7 @@ import { Medicine } from 'src/app/shared/models/interfaces/medicine.interface';
 })
 export class ShowMedicineComponent implements OnInit {
   @Input() data!: Medicine[];
+  isIphone: boolean = false;
 
   medicines: Medicine[] = [];
   public actionSheetButtons = [
@@ -50,6 +51,7 @@ export class ShowMedicineComponent implements OnInit {
 
   async deviceInformation() {
     const info = await Device.getInfo();
-    console.log(info.platform === 'ios');
+    console.log('epale sempai', info.platform === 'ios');
+    this.isIphone = info.platform === 'ios';
   }
 }

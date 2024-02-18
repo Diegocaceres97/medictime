@@ -1,7 +1,11 @@
+<ion-content padding [fullscreen]="true">
+
 <div *ngIf="hasMedicine; else dontHave">
 <app-show-medicine [data]="allData"></app-show-medicine>
 <app-add id="open-modal" iconName="medkit-outline" (clickButton)="openModal()"> </app-add>
 </div>
+
+</ion-content>
 
 <ng-template #dontHave>
   <app-show-medicine></app-show-medicine>
