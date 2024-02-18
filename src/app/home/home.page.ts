@@ -10,6 +10,7 @@ import {
   IonItem,
   IonInput,
   IonDatetime,
+  IonToast
 } from '@ionic/angular/standalone';
 import { AddComponent } from '../shared/components/medicine/add/add.component';
 import { FormsModule } from '@angular/forms';
@@ -24,7 +25,7 @@ import { AlertController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { ShowMedicineComponent } from '../shared/components/medicine/show-medicine/show-medicine.component';
 import { MedicineService } from '../shared/services/medicine.service';
-
+import { Toast } from '@capacitor/toast';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -41,6 +42,7 @@ import { MedicineService } from '../shared/services/medicine.service';
     IonButton,
     IonItem,
     IonInput,
+    IonToast,
     IonDatetime,
     AddComponent,
     CommonModule,
@@ -88,13 +90,20 @@ export class HomePage {
       (!this.medicineHour && !this.medicineDay)
     ) {
       console.error('por favor corrige los datos');
-      const alert = await this.alertController.create({
+      /* const alert = await this.alertController.create({
         header: 'Campo faltante o erróneo',
         message: 'Por favor revisa que campo hace falta llenar o corregir',
         buttons: ['Okay'],
       });
 
-      alert.present();
+      await alert.present(); */
+      const showHelloToast = async () => {
+        await Toast.show({
+          text: '¡Por favor revisa los datos y corrigelo!',
+        });
+      };
+
+      await showHelloToast();
       return;
     }
 
@@ -127,7 +136,7 @@ export class HomePage {
     }
   }
 
-  openModal() {}
+
 
   deleteAll() {
     this.hasMedicine = false;

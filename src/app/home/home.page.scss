@@ -25,3 +25,13 @@
 #container a {
   text-decoration: none;
 }
+
+ion-alert {
+z-index: 3;
+}
+
+ion-toast {
+  background-color: red; // Puedes ajustar el color aquí
+  color: white; // Puedes ajustar el color del texto aquí
+}
+
