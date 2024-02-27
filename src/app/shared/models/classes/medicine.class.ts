@@ -6,21 +6,30 @@ import { MedicineAbstract } from "./medicine.abstract";
 export class AddMedicine extends MedicineAbstract {
 
   medicines: Medicine[] = [];
-  proof = new MedicineService;
+  medicineService = new MedicineService;
 
   constructor(public data: Medicine){
     super();
-    this.medicines = JSON.parse(localStorage.getItem('medicina') || '[]');
+    this.medicines = this.medicineService.getData() || '[]';
   }
 
    Medicine(): void {
       this.medicines.push(this.data);
       //console.log(this.proof.medicineSubject.value)
-      localStorage.setItem('medicina',JSON.stringify(this.medicines));
+      this.medicineService.saveData(this.medicines);
     }
 }
 export class EditMedicine extends MedicineAbstract {
-   Medicine(): void { }
+
+  medicineService = new MedicineService;
+  medicines: Medicine[] = [];
+
+  constructor(public data: Medicine[]) {super()}
+
+   Medicine(): void {
+    this.medicineService.deleteAllMedicines();
+    this.medicineService.saveData(this.data);
+   }
 }
 export class DeleteMedicine extends MedicineAbstract {
    Medicine(): void { }

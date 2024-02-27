@@ -71,7 +71,7 @@ export class HomePage {
     private alertController: AlertController,
     private medicalService: MedicineService
   ) {
-    this.hasMedicine = localStorage.getItem('medicina') ? true : false;
+    this.hasMedicine = this.medicalService.getData() ? true : false;
   }
 
   @ViewChild(IonModal) modal!: IonModal;

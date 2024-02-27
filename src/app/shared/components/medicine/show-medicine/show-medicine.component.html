@@ -1,9 +1,8 @@
 <div class="container" [ngClass]="{'marginTop': isIphone}" *ngFor="let item of data">
-  <div class="container__text" id="open-action-sheet">
+  <div class="container__text" id="open-action-sheet" (click)="proof(item)">
     <h6><ion-icon name="bandage-outline"></ion-icon> {{item.name | titlecase}}</h6>
     <p>cada: <b>{{item.perHour}}</b> horas</p>
     <p>por: <b>{{item.perDay}}</b> días</p>
   </div>
 </div>
 
-<ion-action-sheet trigger="open-action-sheet" header="Acciones" [buttons]="actionSheetButtons"></ion-action-sheet>
