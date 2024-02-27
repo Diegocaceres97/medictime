@@ -1,6 +1,6 @@
 #container {
   text-align: center;
-
+  background-color: #ffc409;
   position: absolute;
   left: 0;
   right: 0;
@@ -27,11 +27,19 @@
 }
 
 ion-alert {
-z-index: 3;
+  z-index: 3;
 }
 
-ion-toast {
-  background-color: red; // Puedes ajustar el color aquí
-  color: white; // Puedes ajustar el color del texto aquí
+.proof {
+  display: flex;
+  margin: auto;
+  height: 94vh;
+  width: 85%;
+  color: grey;
+  /* align-self: center; */
+  align-items: center;
 }
 
+.footer {
+  background-color: #ffc409;
+}

@@ -2,15 +2,13 @@
 
 <div *ngIf="hasMedicine; else dontHave">
 <app-show-medicine [data]="allData"></app-show-medicine>
-<app-add id="open-modal" iconName="medkit-outline" > </app-add>
 </div>
 
 </ion-content>
 
 <ng-template #dontHave>
-  <app-show-medicine></app-show-medicine>
   <ion-content [fullscreen]="true">
-    <app-add id="open-modal" iconName="medkit-outline" > </app-add>
+    <h1 class="proof">Agrega data para empezar  <ion-icon name="arrow-down-circle"></ion-icon></h1>
   </ion-content>
 </ng-template>
 
@@ -67,8 +65,8 @@
 
 
 
-<ion-footer [translucent]="true">
+<ion-footer [translucent]="true" class="footer">
   <ion-toolbar>
-    <ion-title style="text-align: center;">Diego 🚀</ion-title>
+    <app-add id="open-modal" iconName="medkit-outline" > </app-add>
   </ion-toolbar>
 </ion-footer>

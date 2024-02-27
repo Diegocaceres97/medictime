@@ -71,7 +71,7 @@ export class HomePage {
     private alertController: AlertController,
     private medicalService: MedicineService
   ) {
-    this.hasMedicine = this.medicalService.getData() ? true : false;
+    this.hasMedicine = this.medicalService.getData().length > 0 ? true : false;
   }
 
   @ViewChild(IonModal) modal!: IonModal;
