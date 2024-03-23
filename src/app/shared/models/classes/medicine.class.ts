@@ -22,6 +22,17 @@ export class AddMedicine extends MedicineAbstract {
 export class EditMedicine extends MedicineAbstract {
 
   medicineService = new MedicineService;
+/*   medicines: Medicine[] = []; */
+
+  constructor(public data: Medicine[]) {super()}
+
+   Medicine(): void {
+   /*  this.medicineService.deleteAllMedicines();
+    this.medicineService.saveData(this.data); */
+   }
+}
+export class DeleteMedicine extends MedicineAbstract {
+  medicineService = new MedicineService;
   medicines: Medicine[] = [];
 
   constructor(public data: Medicine[]) {super()}
@@ -30,9 +41,6 @@ export class EditMedicine extends MedicineAbstract {
     this.medicineService.deleteAllMedicines();
     this.medicineService.saveData(this.data);
    }
-}
-export class DeleteMedicine extends MedicineAbstract {
-   Medicine(): void { }
 }
 export class DeleteAllMedicine extends MedicineAbstract {
    Medicine(): void { }

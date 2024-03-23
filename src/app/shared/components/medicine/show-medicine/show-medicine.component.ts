@@ -6,7 +6,7 @@ import { IonButton, IonIcon, IonActionSheet } from '@ionic/angular/standalone';
 import { Medicine } from 'src/app/shared/models/interfaces/medicine.interface';
 import { ActionSheetController } from '@ionic/angular';
 import { UserMedicine } from 'src/app/shared/models/classes/factory/userMedicine.factory';
-import { editMedicine } from 'src/app/shared/utilities/medicine.functions';
+import { deleteMedicine, editMedicine } from 'src/app/shared/utilities/medicine.functions';
 @Component({
   selector: 'app-show-medicine',
   templateUrl: './show-medicine.component.html',
@@ -86,7 +86,7 @@ export class ShowMedicineComponent implements OnInit {
         this.data = this.data.filter(
           (objeto) => objeto.id !== this.medicineSelected?.id
         );
-        editMedicine(this.data, practiceFac);
+        deleteMedicine(this.data, practiceFac);
         break;
       case 'edit':
         console.log('"shareeee"');

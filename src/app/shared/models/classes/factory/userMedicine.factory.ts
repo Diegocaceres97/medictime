@@ -10,8 +10,8 @@ export class UserMedicine implements MedicineFactory {
   editMedicine(data: Medicine[]): MedicineAbstract {
     return new EditMedicine(data);
   }
-  deleteMedicine(): MedicineAbstract {
-    return new DeleteMedicine();
+  deleteMedicine(data: Medicine[]): MedicineAbstract {
+    return new DeleteMedicine(data);
   }
   deleteAllMedicine(): MedicineAbstract {
     return new DeleteAllMedicine();
