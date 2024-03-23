@@ -6,3 +6,55 @@
   </div>
 </div>
 
+<ion-modal [isOpen]="isOpen" (willDismiss)="onWillDismiss($event)">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar >
+        <ion-buttons slot="start">
+          <ion-button (click)="isOpen=false">Cancelar</ion-button>
+        </ion-buttons>
+        <ion-title>Agregar medicina</ion-title>
+        <ion-buttons slot="end" >
+          <ion-button (click)="confirm()"  [strong]="true">Confirmar</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <ion-item>
+        <ion-input
+          label="Nombre medicina"
+          labelPlacement="stacked"
+          type="text"
+          autocomplete="true"
+          placeholder="Medicina"
+          [(ngModel)]="medicineSelected.name"
+        ></ion-input>
+      </ion-item>
+      <hr>
+      <ion-item>
+        <ion-input
+        label="¿Cada cuántas horas?"
+          type="number"
+          placeholder="0 horas"
+          [(ngModel)]="medicineSelected.perHour"
+        ></ion-input>
+      </ion-item>
+      <hr>
+      <ion-item>
+        <ion-input
+        label="¿Por cuántos días?"
+          type="number"
+          placeholder="0 días"
+          [(ngModel)]="medicineSelected.perDay"
+        ></ion-input>
+      </ion-item>
+      <hr>
+      <ion-item>
+        <ion-label>Selecciona la hora y fecha de inicialización:</ion-label>
+          <ion-datetime id="datetime" [(ngModel)]="medicineSelected.date"></ion-datetime>
+      </ion-item>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+

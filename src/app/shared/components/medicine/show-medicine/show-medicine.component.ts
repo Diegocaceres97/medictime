@@ -2,23 +2,62 @@ import { MedicineService } from './../../../services/medicine.service';
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { Device } from '@capacitor/device';
-import { IonButton, IonIcon, IonActionSheet } from '@ionic/angular/standalone';
+import {
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonContent,
+  IonIcon,
+  IonActionSheet,
+  IonModal,
+  IonButtons,
+  IonButton,
+  IonItem,
+  IonInput,
+  IonDatetime,
+  IonToast, IonLabel } from '@ionic/angular/standalone';
 import { Medicine } from 'src/app/shared/models/interfaces/medicine.interface';
 import { ActionSheetController } from '@ionic/angular';
 import { UserMedicine } from 'src/app/shared/models/classes/factory/userMedicine.factory';
-import { deleteMedicine, editMedicine } from 'src/app/shared/utilities/medicine.functions';
+import {
+  deleteMedicine,
+  editMedicine,
+} from 'src/app/shared/utilities/medicine.functions';
+import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-show-medicine',
   templateUrl: './show-medicine.component.html',
   styleUrls: ['./show-medicine.component.scss'],
   standalone: true,
-  imports: [IonButton, IonIcon, IonActionSheet, CommonModule],
+  imports: [IonLabel,
+    IonHeader,
+    IonModal,
+    IonButton,
+    IonIcon,
+    IonActionSheet,
+    CommonModule,
+    IonHeader,
+    IonButtons,
+    IonItem,
+    IonToolbar,
+    IonTitle,
+    IonContent,
+    IonInput,
+    IonDatetime,
+    IonToast,
+    FormsModule
+  ],
 })
 export class ShowMedicineComponent implements OnInit {
   @Input() data!: Medicine[];
   isIphone: boolean = false;
 
   medicines: Medicine[] = [];
+  name?: string;
+  medicineHour?: string;
+  medicineDay?: string;
+  date!: Date;
+  isOpen:boolean = false;
   public actionSheetButtons = [
     {
       text: 'Eliminar',
@@ -89,12 +128,21 @@ export class ShowMedicineComponent implements OnInit {
         deleteMedicine(this.data, practiceFac);
         break;
       case 'edit':
-        console.log('"shareeee"');
+        console.log('"edit"');
+        this.isOpen = true;
         break;
 
       default:
         console.warn('cancel');
         break;
     }
+  }
+
+  onWillDismiss(event:any){
+
+  }
+
+  confirm(){
+
   }
 }
