@@ -32,12 +32,16 @@ ion-alert {
 
 .noData {
   display: flex;
-  margin: auto;
-  height: 94vh;
-  width: 90%;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+
+  &__text{
   color: grey;
   /* align-self: center; */
   align-items: center;
+  }
 }
 
 .footer {
