@@ -15,7 +15,9 @@ import {
   IonItem,
   IonInput,
   IonDatetime,
-  IonToast, IonLabel } from '@ionic/angular/standalone';
+  IonToast,
+  IonLabel,
+} from '@ionic/angular/standalone';
 import { Medicine } from 'src/app/shared/models/interfaces/medicine.interface';
 import { ActionSheetController } from '@ionic/angular';
 import { UserMedicine } from 'src/app/shared/models/classes/factory/userMedicine.factory';
@@ -29,7 +31,8 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './show-medicine.component.html',
   styleUrls: ['./show-medicine.component.scss'],
   standalone: true,
-  imports: [IonLabel,
+  imports: [
+    IonLabel,
     IonHeader,
     IonModal,
     IonButton,
@@ -45,7 +48,7 @@ import { FormsModule } from '@angular/forms';
     IonInput,
     IonDatetime,
     IonToast,
-    FormsModule
+    FormsModule,
   ],
 })
 export class ShowMedicineComponent implements OnInit {
@@ -57,7 +60,7 @@ export class ShowMedicineComponent implements OnInit {
   medicineHour?: string;
   medicineDay?: string;
   date!: Date;
-  isOpen:boolean = false;
+  isOpen: boolean = false;
   public actionSheetButtons = [
     {
       text: 'Eliminar',
@@ -138,11 +141,24 @@ export class ShowMedicineComponent implements OnInit {
     }
   }
 
-  onWillDismiss(event:any){
+  onWillDismiss(event: any) {}
 
-  }
+  confirm() {
+    //this.data = [{...this.data, ...this.medicineSelected}]
+    this.data = this.data.map((item) => {
+      if (item.id === this.medicineSelected.id) {
+        return Object.assign(item, this.medicineSelected);
+      }
+      return item;
+    });
 
-  confirm(){
-
+    try {
+      const practiceFac = new UserMedicine();
+      editMedicine(this.data, practiceFac);
+    } catch (error) {
+      console.error('error ', error);
+    } finally {
+      this.isOpen = false;
+    }
   }
 }
