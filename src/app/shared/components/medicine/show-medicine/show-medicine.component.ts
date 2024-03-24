@@ -26,6 +26,7 @@ import {
   editMedicine,
 } from 'src/app/shared/utilities/medicine.functions';
 import { FormsModule } from '@angular/forms';
+import { Toast } from '@capacitor/toast';
 @Component({
   selector: 'app-show-medicine',
   templateUrl: './show-medicine.component.html',
@@ -143,8 +144,24 @@ export class ShowMedicineComponent implements OnInit {
 
   onWillDismiss(event: any) {}
 
-  confirm() {
+  async confirm() {
     //this.data = [{...this.data, ...this.medicineSelected}]
+    if (
+      !this.medicineSelected.name  ||
+      (!this.medicineSelected.perHour || !this.medicineSelected.perDay) ||
+      (this.medicineSelected.perDay! <= 0 ||
+        this.medicineSelected.perDay! <= 0)
+    ) {
+      console.error('por favor corrige los datos');
+      const showHelloToast = async () => {
+        await Toast.show({
+          text: '¡Por favor revisa los datos y corrigelo!',
+        });
+      };
+
+      await showHelloToast();
+      return;
+    }
     this.data = this.data.map((item) => {
       if (item.id === this.medicineSelected.id) {
         return Object.assign(item, this.medicineSelected);

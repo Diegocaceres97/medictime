@@ -85,9 +85,9 @@ export class HomePage {
 
     if (
       !this.name ||
-      (parseInt(this.medicineDay as string) <= 0 &&
+      (parseInt(this.medicineDay as string) <= 0 ||
         parseInt(this.medicineHour as string) <= 0) ||
-      (!this.medicineHour && !this.medicineDay)
+      (!this.medicineHour || !this.medicineDay)
     ) {
       console.error('por favor corrige los datos');
       /* const alert = await this.alertController.create({
