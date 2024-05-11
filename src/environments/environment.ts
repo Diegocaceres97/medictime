@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  onesignal: {
+    appId: '73a12407-e55d-45ab-886c-e3a49829624f',
+    restApiKey: 'NzYxNDIxMTctMmY3Ni00ZTBmLWExNWYtNGEyN2NmYzA5NDUy'
+  }
 };
 
 /*

@@ -14,6 +14,50 @@ PODS:
     - Capacitor
   - CapacitorToast (5.0.7):
     - Capacitor
+  - CordovaPluginsStatic (5.6.0):
+    - CapacitorCordova
+    - OneSignalXCFramework (= 5.1.6)
+  - OneSignalXCFramework (5.1.6):
+    - OneSignalXCFramework/OneSignalComplete (= 5.1.6)
+  - OneSignalXCFramework/OneSignal (5.1.6):
+    - OneSignalXCFramework/OneSignalCore
+    - OneSignalXCFramework/OneSignalExtension
+    - OneSignalXCFramework/OneSignalNotifications
+    - OneSignalXCFramework/OneSignalOSCore
+    - OneSignalXCFramework/OneSignalOutcomes
+    - OneSignalXCFramework/OneSignalUser
+  - OneSignalXCFramework/OneSignalComplete (5.1.6):
+    - OneSignalXCFramework/OneSignal
+    - OneSignalXCFramework/OneSignalInAppMessages
+    - OneSignalXCFramework/OneSignalLocation
+  - OneSignalXCFramework/OneSignalCore (5.1.6)
+  - OneSignalXCFramework/OneSignalExtension (5.1.6):
+    - OneSignalXCFramework/OneSignalCore
+    - OneSignalXCFramework/OneSignalOutcomes
+  - OneSignalXCFramework/OneSignalInAppMessages (5.1.6):
+    - OneSignalXCFramework/OneSignalCore
+    - OneSignalXCFramework/OneSignalNotifications
+    - OneSignalXCFramework/OneSignalOSCore
+    - OneSignalXCFramework/OneSignalOutcomes
+    - OneSignalXCFramework/OneSignalUser
+  - OneSignalXCFramework/OneSignalLocation (5.1.6):
+    - OneSignalXCFramework/OneSignalCore
+    - OneSignalXCFramework/OneSignalNotifications
+    - OneSignalXCFramework/OneSignalOSCore
+    - OneSignalXCFramework/OneSignalUser
+  - OneSignalXCFramework/OneSignalNotifications (5.1.6):
+    - OneSignalXCFramework/OneSignalCore
+    - OneSignalXCFramework/OneSignalExtension
+    - OneSignalXCFramework/OneSignalOutcomes
+  - OneSignalXCFramework/OneSignalOSCore (5.1.6):
+    - OneSignalXCFramework/OneSignalCore
+  - OneSignalXCFramework/OneSignalOutcomes (5.1.6):
+    - OneSignalXCFramework/OneSignalCore
+  - OneSignalXCFramework/OneSignalUser (5.1.6):
+    - OneSignalXCFramework/OneSignalCore
+    - OneSignalXCFramework/OneSignalNotifications
+    - OneSignalXCFramework/OneSignalOSCore
+    - OneSignalXCFramework/OneSignalOutcomes
 
 DEPENDENCIES:
   - "Capacitor (from `../../node_modules/@capacitor/ios`)"
@@ -24,6 +68,11 @@ DEPENDENCIES:
   - "CapacitorKeyboard (from `../../node_modules/@capacitor/keyboard`)"
   - "CapacitorStatusBar (from `../../node_modules/@capacitor/status-bar`)"
   - "CapacitorToast (from `../../node_modules/@capacitor/toast`)"
+  - CordovaPluginsStatic (from `../capacitor-cordova-ios-plugins`)
+
+SPEC REPOS:
+  trunk:
+    - OneSignalXCFramework
 
 EXTERNAL SOURCES:
   Capacitor:
@@ -42,6 +91,8 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/@capacitor/status-bar"
   CapacitorToast:
     :path: "../../node_modules/@capacitor/toast"
+  CordovaPluginsStatic:
+    :path: "../capacitor-cordova-ios-plugins"
 
 SPEC CHECKSUMS:
   Capacitor: ebfc16cdb8116d04c101686b080342872da42d43
@@ -52,7 +103,9 @@ SPEC CHECKSUMS:
   CapacitorKeyboard: ce5e01064cf57a2c05b32565310713b7fe6cc6f9
   CapacitorStatusBar: 565c0a1ebd79bb40d797606a8992b4a105885309
   CapacitorToast: c8bb89eeb59a23c1fc298f138cc06c8ff4d90ac1
+  CordovaPluginsStatic: a1460ef973f9916d2b9a4898e8a83cf699bd1f93
+  OneSignalXCFramework: f6533cc1f7a5ddded80ee5fe183901a99ad46f4f
 
-PODFILE CHECKSUM: 0f7c4967733a1775559199f29f3769e8048bad1e
+PODFILE CHECKSUM: 88657d32471421ad6beedc57d169c578caca5109
 
 COCOAPODS: 1.12.1

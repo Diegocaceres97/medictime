@@ -1,4 +1,10 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, ViewChild } from '@angular/core';
+import {
+  Component,
+  CUSTOM_ELEMENTS_SCHEMA,
+  inject,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import {
   IonHeader,
   IonToolbar,
@@ -10,7 +16,7 @@ import {
   IonItem,
   IonInput,
   IonDatetime,
-  IonToast
+  IonToast,
 } from '@ionic/angular/standalone';
 import { AddComponent } from '../shared/components/medicine/add/add.component';
 import { FormsModule } from '@angular/forms';
@@ -21,11 +27,11 @@ import {
   createMedicine,
   generateRandomID,
 } from '../shared/utilities/medicine.functions';
-import { AlertController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { ShowMedicineComponent } from '../shared/components/medicine/show-medicine/show-medicine.component';
 import { MedicineService } from '../shared/services/medicine.service';
 import { Toast } from '@capacitor/toast';
+import { OnesignalService } from '../shared/services/onesignal/onesignal.service';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -50,7 +56,7 @@ import { Toast } from '@capacitor/toast';
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class HomePage {
+export class HomePage implements OnInit {
   message =
     'This modal example uses the modalController to present and dismiss modals.';
   name?: string;
@@ -66,15 +72,21 @@ export class HomePage {
     date: undefined,
   };
   hasMedicine: boolean = false;
+  private onesignal = inject(OnesignalService);
 
-  constructor(
-    private alertController: AlertController,
-    private medicalService: MedicineService
-  ) {
+  constructor(private medicalService: MedicineService) {
     this.hasMedicine = this.medicalService.getData().length > 0 ? true : false;
   }
 
   @ViewChild(IonModal) modal!: IonModal;
+
+  ngOnInit() {
+    console.log('ng init')
+  }
+
+  async oneSignalPermisions() {
+    await this.onesignal.OneSignalIOSPermission();
+  }
 
   cancel() {
     this.modal.dismiss(null, 'cancel');
@@ -85,9 +97,10 @@ export class HomePage {
 
     if (
       !this.name ||
-      (parseInt(this.medicineDay as string) <= 0 ||
-        parseInt(this.medicineHour as string) <= 0) ||
-      (!this.medicineHour || !this.medicineDay)
+      parseInt(this.medicineDay as string) <= 0 ||
+      parseInt(this.medicineHour as string) <= 0 ||
+      !this.medicineHour ||
+      !this.medicineDay
     ) {
       console.error('por favor corrige los datos');
       /* const alert = await this.alertController.create({
@@ -135,8 +148,6 @@ export class HomePage {
       this.message = `Hello, ${ev.detail.data}!`;
     }
   }
-
-
 
   deleteAll() {
     this.hasMedicine = false;
