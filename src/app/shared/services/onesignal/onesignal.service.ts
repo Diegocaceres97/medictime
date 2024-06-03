@@ -120,9 +120,9 @@ sendNotification(msg: string, title: string, data: any = null, external_id?: any
     //android_channel_id: environment.onesignal.android_channel_id,
     // small_icon: 'mipmap/ic_launcher_round',
     // large_icon: 'mipmap/ic_launcher_round',
-    small_icon: 'mipmap/ic_notification',
+   /*  small_icon: 'mipmap/ic_notification',
     large_icon: 'mipmap/ic_notification_large',
-    ios_sound: 'sound.wav',
+    ios_sound: 'sound.wav', */
     // filters: [
     //   {
     //     field: 'tag',
