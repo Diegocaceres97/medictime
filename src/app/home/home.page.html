@@ -68,7 +68,9 @@
 
 
 <ion-footer [translucent]="true" class="footer" color="warning">
-
+  <button (click)="sendNotificationAllUsers()">send all</button>
+  <hr>
+  <button (click)="sendNotificationToSpecificDevice()">send one</button>
     <app-add id="open-modal" iconName="medkit-outline" > </app-add>
 
 </ion-footer>

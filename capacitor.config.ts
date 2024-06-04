@@ -7,6 +7,9 @@ const config: CapacitorConfig = {
   server: {
     androidScheme: 'https'
   },
+  ios: {
+    handleApplicationNotifications:false
+  },
   plugins: {
     LocalNotifications: {
       smallIcon: "ic_stat_icon_config_sample",

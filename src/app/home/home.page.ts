@@ -32,6 +32,9 @@ import { ShowMedicineComponent } from '../shared/components/medicine/show-medici
 import { MedicineService } from '../shared/services/medicine.service';
 import { Toast } from '@capacitor/toast';
 import { OnesignalService } from '../shared/services/onesignal/onesignal.service';
+import { Capacitor } from '@capacitor/core';
+import { lastValueFrom } from 'rxjs';
+import { Preferences } from '@capacitor/preferences';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -82,10 +85,30 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     console.log('ng init')
+    if(Capacitor.getPlatform() != 'web') this.oneSignal()
+  }
+
+  async oneSignal() {
+    await this.onesignal.OneSignalIOSPermission();
+    const randomNumber = (Math.random()).toString();
+
+    const data = await this.getStorage('auth');
+
+    if(data?.value){ return;}
+
+    Preferences.set({key: 'auth', value: randomNumber});
+
+    await lastValueFrom(
+      this.onesignal.createOneSignalUser(randomNumber)
+    );
   }
 
   async oneSignalPermisions() {
     await this.onesignal.OneSignalIOSPermission();
+  }
+
+  getStorage(key: string){
+    return Preferences.get({key: key});
   }
 
   cancel() {
@@ -151,5 +174,37 @@ export class HomePage implements OnInit {
 
   deleteAll() {
     this.hasMedicine = false;
+  }
+
+  async sendNotificationToSpecificDevice() {
+    try {
+
+      const data = await this.getStorage('auth');
+
+    if(data?.value){
+      await lastValueFrom(
+      this.onesignal.sendNotification('this is a test message','test message',{type: 'user1'}, data.value)
+      );
+    }
+
+    }catch(e) {
+
+      console.log(e)
+
+    }
+  }
+
+  async sendNotificationAllUsers() {
+    try {
+      await lastValueFrom(
+      this.onesignal.sendNotification('this is a test message for all users','test message for all users',{type: 'user1'})
+      );
+
+
+    }catch(e) {
+
+      console.log(e)
+
+    }
   }
 }
