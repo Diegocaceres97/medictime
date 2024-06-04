@@ -96,11 +96,23 @@ export class HomePage implements OnInit {
 
     if(data?.value){ return;}
 
-    Preferences.set({key: 'auth', value: randomNumber});
+    Preferences.set({key: 'auth', value: this.generateRandomString(10)});
 
     await lastValueFrom(
       this.onesignal.createOneSignalUser(randomNumber)
     );
+  }
+
+  generateRandomString(length: number): string {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+
+    for (let i = 0; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      result += characters.charAt(randomIndex);
+    }
+
+    return result;
   }
 
   async oneSignalPermisions() {
